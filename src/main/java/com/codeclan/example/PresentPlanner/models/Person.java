@@ -6,22 +6,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "presentplanner")
+@Table(name = "persons")
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    @Column (name = "person")
+    @Column(name = "person")
     private String name;
 
-    @Column (name = "events)of_birth")
+    @Column(name = "events)of_birth")
     private Event dateOfBirth;
 
     @JsonIgnoreProperties("person")
 
     @OneToMany(mappedBy = "person")
-    private  List<Event> dates;
+    private List<Event> dates;
+
 
     @OneToMany(mappedBy = "person")
     private List<Items> items;
@@ -29,10 +30,11 @@ public class Person {
     public Person(String name, Event dateOfBirth) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
-        this.dates =   new ArrayList<>();
+        this.dates = new ArrayList<>();
         this.items = new ArrayList<>();
     }
-    public Person(){
+
+    public Person() {
 
     }
 
@@ -52,13 +54,6 @@ public class Person {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public List<Event> getDate() {
-        return dates;
-    }
-
-    public void setDate(List<Event> date) {
-        this.dates = dates;
-    }
 
     public List<Items> getItems() {
         return items;
@@ -67,10 +62,23 @@ public class Person {
     public void setItems(List<Items> items) {
         this.items = items;
     }
-    public void addDate(Event date){
+
+    public void addDate(Event date) {
         this.dates.add(date);
+
     }
-    public void addITems(Items item){
+
+    public void addITems(Items item) {
         this.items.add(item);
     }
+
+
+    public List<Event> getDates() {
+        return dates;
+    }
+
+    public void setDates(List<Event> dates) {
+        this.dates = dates;
+    }
 }
+
