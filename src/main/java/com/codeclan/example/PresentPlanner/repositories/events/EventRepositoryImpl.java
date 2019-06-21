@@ -1,10 +1,10 @@
-package com.codeclan.example.PresentPlanner.repositories.date;
+package com.codeclan.example.PresentPlanner.repositories.events;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
 
-public class DateRepositoryImpl {
+public class EventRepositoryImpl {
 
     @Autowired
     EntityManager entityManager;

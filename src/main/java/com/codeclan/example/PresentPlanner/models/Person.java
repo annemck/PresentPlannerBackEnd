@@ -1,6 +1,4 @@
 package com.codeclan.example.PresentPlanner.models;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.tools.javac.jvm.Items;
 import javax.persistence.*;
@@ -17,18 +15,18 @@ public class Person {
     @Column (name = "person")
     private String name;
 
-    @Column (name = "date)of_birth")
-    private Date dateOfBirth;
+    @Column (name = "events)of_birth")
+    private Event dateOfBirth;
 
     @JsonIgnoreProperties("person")
 
     @OneToMany(mappedBy = "person")
-    private  List<Date> dates;
+    private  List<Event> dates;
 
     @OneToMany(mappedBy = "person")
     private List<Items> items;
 
-    public Person(String name, Date dateOfBirth) {
+    public Person(String name, Event dateOfBirth) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.dates =   new ArrayList<>();
@@ -46,19 +44,19 @@ public class Person {
         this.name = name;
     }
 
-    public Date getDateOfBirth() {
+    public Event getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(Event dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public List<Date> getDate() {
+    public List<Event> getDate() {
         return dates;
     }
 
-    public void setDate(List<Date> date) {
+    public void setDate(List<Event> date) {
         this.dates = dates;
     }
 
@@ -69,7 +67,7 @@ public class Person {
     public void setItems(List<Items> items) {
         this.items = items;
     }
-    public void addDate(Date date){
+    public void addDate(Event date){
         this.dates.add(date);
     }
     public void addITems(Items item){

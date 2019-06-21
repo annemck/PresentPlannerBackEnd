@@ -1,7 +1,7 @@
 package com.codeclan.example.PresentPlanner.controllers;
 
 
-import com.codeclan.example.PresentPlanner.repositories.date.DateRepository;
+import com.codeclan.example.PresentPlanner.repositories.events.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.RestController;
 public class DateController {
 
     @Autowired
-    DateRepository dateRepository;
+    EventRepository dateRepository;
 }
