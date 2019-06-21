@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "presentplanner")
+@Table(name = "persons")
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class Person {
     @JsonIgnoreProperties("person")
 
     @OneToMany(mappedBy = "person")
-    private  List<Date> dates;
+    private  List<Event> events;
 
     @OneToMany(mappedBy = "person")
     private List<Items> items;
@@ -31,7 +31,7 @@ public class Person {
     public Person(String name, Date dateOfBirth) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
-        this.dates =   new ArrayList<>();
+        this.events =   new ArrayList<>();
         this.items = new ArrayList<>();
     }
     public Person(){
@@ -54,12 +54,12 @@ public class Person {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public List<Date> getDate() {
-        return dates;
+    public List<Event> getEvents() {
+        return events;
     }
 
-    public void setDate(List<Date> date) {
-        this.dates = dates;
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 
     public List<Items> getItems() {
@@ -69,8 +69,8 @@ public class Person {
     public void setItems(List<Items> items) {
         this.items = items;
     }
-    public void addDate(Date date){
-        this.dates.add(date);
+    public void addDate(Event  events){
+        this.events.add(event);
     }
     public void addITems(Items item){
         this.items.add(item);
