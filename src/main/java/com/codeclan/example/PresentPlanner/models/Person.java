@@ -1,8 +1,6 @@
 package com.codeclan.example.PresentPlanner.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.tools.javac.jvm.Items;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +15,6 @@ public class Person {
     @Column(name = "person")
     private String name;
 
-//    @DateTimeFormat(pattern="dd.MM.yyyy hh:mm")
-
-    @Column(name = "date_of_birth")
-    private String dateOfBirth;
-
     @JsonIgnoreProperties("person")
 
     @OneToMany(mappedBy = "person")
@@ -31,9 +24,8 @@ public class Person {
     @OneToMany(mappedBy = "person")
     private List<Items> items;
 
-    public Person(String name, String dateOfBirth) {
+    public Person(String name) {
         this.name = name;
-        this.dateOfBirth = dateOfBirth;
         this.dates = new ArrayList<>();
         this.items = new ArrayList<>();
     }
@@ -50,13 +42,6 @@ public class Person {
         this.name = name;
     }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth( String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
 
     public Long getId() {
         return Id;
@@ -74,6 +59,14 @@ public class Person {
         this.items = items;
     }
 
+
+    public List<Event> getDates() {
+        return dates;
+    }
+
+    public void setDates(List<Event> dates) {
+        this.dates = dates;
+    }
     public void addDate(Event date) {
         this.dates.add(date);
 
@@ -84,12 +77,6 @@ public class Person {
     }
 
 
-    public List<Event> getDates() {
-        return dates;
-    }
-
-    public void setDates(List<Event> dates) {
-        this.dates = dates;
-    }
 }
+
 
