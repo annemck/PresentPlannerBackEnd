@@ -28,10 +28,10 @@ public class DataLoader implements ApplicationRunner {
 
     public void run(ApplicationArguments args){
 
-        Person dad = new Person("Dad", "29-06-1963");
+        Person dad = new Person("Dad");
         personRepository.save(dad);
 
-        Person mum = new Person("Mum", "14-07-1969");
+        Person mum = new Person("Mum");
         personRepository.save(mum);
 
         Event dadBirthday = new Event("Birthday", "29-06-2019", dad);
