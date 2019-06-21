@@ -36,8 +36,7 @@ public class Item {
     @JoinColumn(name="person_id", nullable = false)
     private Person person;
 
-    public Item(Long id, String name, String description, String location, double price, String link, String additionalDetail, boolean starItem, Person person) {
-        this.id = id;
+    public Item(String name, String description, String location, double price, String link, String additionalDetail, boolean starItem, Person person) {
         this.name = name;
         this.description = description;
         this.location = location;
