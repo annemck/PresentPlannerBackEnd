@@ -8,36 +8,36 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 @Entity
-@Table(name="dates")
-public class Date {
+@Table(name="events")
+public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String event;
+    @Column(name="event-name")
+    private String eventName;
 
-    @Column
-    private java.util.Date date;
+    @Column(name="event-events")
+    private java.util.Date eventDate;
 
     @JsonIgnoreProperties({"items", "dates"})
     @ManyToOne
     @JoinColumn(name = "person_id", nullable = false)
     private Person person;
 
-    public Date(String event, String date, Person person) {
-        this.event = event;
+    public Event(String event, String eventDate, Person person) {
+        this.eventName = event;
         SimpleDateFormat newDate = new SimpleDateFormat("dd-MM-yyyy");
         try {
-            this.date = newDate.parse(date);
+            this.eventDate = newDate.parse(eventDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
         this.person = person;
     }
 
-    public Date() { }
+    public Event() { }
 
     public Long getId() {
         return id;
@@ -47,16 +47,16 @@ public class Date {
         this.id = id;
     }
 
-    public String getEvent() {
-        return event;
+    public String getEventName() {
+        return eventName;
     }
 
-    public void setEvent(String event) {
-        this.event = event;
+    public void setEventName(String event) {
+        this.eventName = event;
     }
 
     public String getDate() {
-        java.util.Date savedDate = this.date;
+        java.util.Date savedDate = this.eventDate;
         String date = new SimpleDateFormat("dd-MM-yyyy").format(savedDate);
         return date;
     }
@@ -64,7 +64,7 @@ public class Date {
     public void setDate(String newDate) {
         SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
         try {
-            this.date = date.parse(newDate);
+            this.eventDate = date.parse(newDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
