@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/dates")
-public class DateController {
+public class EventController {
 
     @Autowired
-    EventRepository dateRepository;
+    EventRepository eventRepository;
 }
