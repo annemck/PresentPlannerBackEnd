@@ -26,7 +26,7 @@ public class Item {
     @Column
     private String link;
 
-    @Column(name = "additional_date")
+    @Column(name = "additional_detail")
     private String additionalDetail;
 
     @Column(name = "star_item")
