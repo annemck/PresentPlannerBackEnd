@@ -32,7 +32,11 @@ public class Item {
     @Column(name = "star_item")
     private boolean starItem;
 
-    public Item(Long id, String name, String description, String location, double price, String link, String additionalDetail, boolean starItem) {
+    @ManyToOne
+    @JoinColumn(name="person_id", nullable = false)
+    private Person person;
+
+    public Item(Long id, String name, String description, String location, double price, String link, String additionalDetail, boolean starItem, Person person) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -41,6 +45,7 @@ public class Item {
         this.link = link;
         this.additionalDetail = additionalDetail;
         this.starItem = starItem;
+        this.person = person;
     }
 
     public Item() {
@@ -108,6 +113,14 @@ public class Item {
 
     public void setStarItem(boolean starItem) {
         this.starItem = starItem;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 }
 
