@@ -6,28 +6,32 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Entity
-@Table(name="events")
+@Table(name = "events")
 public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="event-name")
+    @Column(name="event_name")
     private String eventName;
 
-    @Column(name="event-events")
-    private java.util.Date eventDate;
+    @Column(name="date")
+    private Date eventDate;
 
     @JsonIgnoreProperties({"items", "dates"})
     @ManyToOne
-    @JoinColumn(name = "person_id", nullable = false)
+    @JoinColumn(name = "persons_id", nullable = false)
     private Person person;
 
-    public Event(String event, String eventDate, Person person) {
-        this.eventName = event;
+    @Column(name = "day_and_month")
+    private Date dayAndMonth;
+
+    public Event(String eventName, String eventDate, Person person) {
+        this.eventName = eventName;
         SimpleDateFormat newDate = new SimpleDateFormat("dd-MM-yyyy");
         try {
             this.eventDate = newDate.parse(eventDate);
@@ -35,9 +39,21 @@ public class Event {
             e.printStackTrace();
         }
         this.person = person;
+        this.addDayAndMonth();
     }
 
     public Event() { }
+
+    private void addDayAndMonth() {
+        SimpleDateFormat dateType = new SimpleDateFormat("dd-MM");
+        String date = dateType.format(this.eventDate);
+        String shortDate = date.substring(0, 5);
+        try {
+            this.eventDate = dateType.parse(shortDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
 
     public Long getId() {
         return id;
@@ -55,21 +71,6 @@ public class Event {
         this.eventName = event;
     }
 
-    public String getDate() {
-        java.util.Date savedDate = this.eventDate;
-        String date = new SimpleDateFormat("dd-MM-yyyy").format(savedDate);
-        return date;
-    }
-
-    public void setDate(String newDate) {
-        SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            this.eventDate = date.parse(newDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
     public Person getPerson() {
         return person;
     }
@@ -77,4 +78,28 @@ public class Event {
     public void setPerson(Person person) {
         this.person = person;
     }
+
+    public Date getEventDate() {
+        return eventDate;
+    }
+
+    public void setEventDate(String eventDate) {
+        SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            this.eventDate = date.parse(eventDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        this.addDayAndMonth();
+    }
+
+    public Date getDayAndMonth() {
+        return dayAndMonth;
+    }
+
+    public void setDayAndMonth(Date dayAndMonth) {
+        this.dayAndMonth = dayAndMonth;
+    }
+
+
 }

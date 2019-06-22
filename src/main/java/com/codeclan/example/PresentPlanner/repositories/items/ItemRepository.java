@@ -9,5 +9,5 @@ import java.util.List;
 @RepositoryRestResource
 public interface ItemRepository extends JpaRepository<Item, Long>, ItemRepositoryCustom {
 
-    List<Item> getItemsByCustomerId(Long id);
+    List<Item> getItemsByPersonId(Long id);
 }

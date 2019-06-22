@@ -33,7 +33,7 @@ public class Item {
     private boolean starItem;
 
     @ManyToOne
-    @JoinColumn(name="person_id", nullable = false)
+    @JoinColumn(name="persons_id", nullable = false)
     private Person person;
 
     public Item(String name, String description, String location, double price, String link, String additionalDetail, boolean starItem, Person person) {

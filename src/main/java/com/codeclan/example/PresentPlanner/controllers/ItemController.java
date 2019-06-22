@@ -19,6 +19,6 @@ public class ItemController {
 
     @GetMapping(value="/person/{id}")
     public List<Item> getItemsByPersonId(@PathVariable Long id){
-        return itemRepository.getItemsByCustomerId(id);
+        return itemRepository.getItemsByPersonId(id);
     }
 }
