@@ -2,11 +2,12 @@ package com.codeclan.example.PresentPlanner.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.MonthDay;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "events")
@@ -19,41 +20,28 @@ public class Event {
     @Column(name="event_name")
     private String eventName;
 
+    @DateTimeFormat(pattern = "d-MM-yyyy")
     @Column(name="date")
-    private Date eventDate;
+    private LocalDate eventDate;
 
     @JsonIgnoreProperties({"items", "dates"})
     @ManyToOne
     @JoinColumn(name = "persons_id", nullable = false)
     private Person person;
 
+    @DateTimeFormat(pattern = "d-MM")
     @Column(name = "day_and_month")
-    private Date dayAndMonth;
+    private MonthDay dayAndMonth;
 
     public Event(String eventName, String eventDate, Person person) {
         this.eventName = eventName;
-        SimpleDateFormat newDate = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            this.eventDate = newDate.parse(eventDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         this.person = person;
-        this.addDayAndMonth();
+        DateTimeFormatter dateType = DateTimeFormatter.ofPattern("d-MM-yyyy");
+        this.eventDate = LocalDate.parse(eventDate, dateType);
+        this.setDayAndMonth();
     }
 
     public Event() { }
-
-    private void addDayAndMonth() {
-        SimpleDateFormat dateType = new SimpleDateFormat("dd-MM");
-        String date = dateType.format(this.eventDate);
-        String shortDate = date.substring(0, 5);
-        try {
-            this.eventDate = dateType.parse(shortDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
 
     public Long getId() {
         return id;
@@ -79,26 +67,28 @@ public class Event {
         this.person = person;
     }
 
-    public Date getEventDate() {
-        return eventDate;
+    public LocalDate getEventDate() {
+        DateTimeFormatter dateType = DateTimeFormatter.ofPattern("d-MM-yyyy");
+        String stringDate = this.eventDate.format(dateType);
+        return LocalDate.parse(stringDate, dateType);
     }
-
+ 
     public void setEventDate(String eventDate) {
-        SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            this.eventDate = date.parse(eventDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        this.addDayAndMonth();
+        DateTimeFormatter dateType = DateTimeFormatter.ofPattern("d-MM-yyyy");
+        this.eventDate = LocalDate.parse(eventDate, dateType);
+        this.setDayAndMonth();
     }
 
-    public Date getDayAndMonth() {
+    public MonthDay getDayAndMonth() {
         return dayAndMonth;
     }
 
-    public void setDayAndMonth(Date dayAndMonth) {
-        this.dayAndMonth = dayAndMonth;
+    public void setDayAndMonth() {
+        DateTimeFormatter dateTypeOne = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter dateTypeTwo = DateTimeFormatter.ofPattern("d-MM");
+        String stringDate = this.eventDate.format(dateTypeOne);
+        String shortDate = stringDate.substring(0, 5);
+        this.dayAndMonth = MonthDay.parse(shortDate, dateTypeTwo);
     }
 
 

@@ -6,6 +6,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -20,6 +21,7 @@ public class EventRepositoryImpl implements EventRepositoryCustom{
     @Autowired
     EntityManager entityManager;
 
+    @DateTimeFormat(pattern = "d-MM")
     @Transactional
     public List<Event> nextFiveEvents() {
         List<Event> events = null;
@@ -27,7 +29,7 @@ public class EventRepositoryImpl implements EventRepositoryCustom{
         Session session = entityManager.unwrap(Session.class);
 
         Date dateToday = new Date();
-        SimpleDateFormat dateType = new SimpleDateFormat("dd-MM");
+        SimpleDateFormat dateType = new SimpleDateFormat("d-MM");
         String dateString = dateType.format(dateToday);
         Date date = null;
         try {
