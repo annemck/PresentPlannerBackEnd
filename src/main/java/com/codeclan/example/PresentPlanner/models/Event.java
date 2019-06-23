@@ -6,7 +6,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.MonthDay;
 import java.time.format.DateTimeFormatter;
 
 @Entity
@@ -29,16 +28,12 @@ public class Event {
     @JoinColumn(name = "persons_id", nullable = false)
     private Person person;
 
-    @DateTimeFormat(pattern = "d-MM")
-    @Column(name = "day_and_month")
-    private MonthDay dayAndMonth;
 
     public Event(String eventName, String eventDate, Person person) {
         this.eventName = eventName;
         this.person = person;
         DateTimeFormatter dateType = DateTimeFormatter.ofPattern("d-MM-yyyy");
         this.eventDate = LocalDate.parse(eventDate, dateType);
-        this.setDayAndMonth();
     }
 
     public Event() { }
@@ -72,23 +67,18 @@ public class Event {
         String stringDate = this.eventDate.format(dateType);
         return LocalDate.parse(stringDate, dateType);
     }
- 
+
     public void setEventDate(String eventDate) {
         DateTimeFormatter dateType = DateTimeFormatter.ofPattern("d-MM-yyyy");
         this.eventDate = LocalDate.parse(eventDate, dateType);
-        this.setDayAndMonth();
     }
 
-    public MonthDay getDayAndMonth() {
-        return dayAndMonth;
+    public int getEventDay(){
+        return this.eventDate.getDayOfMonth();
     }
 
-    public void setDayAndMonth() {
-        DateTimeFormatter dateTypeOne = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        DateTimeFormatter dateTypeTwo = DateTimeFormatter.ofPattern("d-MM");
-        String stringDate = this.eventDate.format(dateTypeOne);
-        String shortDate = stringDate.substring(0, 5);
-        this.dayAndMonth = MonthDay.parse(shortDate, dateTypeTwo);
+    public int getEventMonth(){
+        return this.eventDate.getMonthValue();
     }
 
 

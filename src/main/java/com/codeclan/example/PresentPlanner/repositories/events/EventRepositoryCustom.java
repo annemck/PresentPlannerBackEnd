@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface EventRepositoryCustom {
 
-    List<Event> nextFiveEvents();
+//    List<Event> nextFiveEvents();
 
 }
