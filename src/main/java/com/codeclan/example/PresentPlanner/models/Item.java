@@ -1,6 +1,8 @@
 package com.codeclan.example.PresentPlanner.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
@@ -32,8 +34,9 @@ public class Item {
     @Column(name = "star_item")
     private boolean starItem;
 
+    @JsonIgnoreProperties({"items", "dates"})
     @ManyToOne
-    @JoinColumn(name="person_id", nullable = false)
+    @JoinColumn(name="persons_id", nullable = false)
     private Person person;
 
     public Item(String name, String description, String location, double price, String link, String additionalDetail, boolean starItem, Person person) {

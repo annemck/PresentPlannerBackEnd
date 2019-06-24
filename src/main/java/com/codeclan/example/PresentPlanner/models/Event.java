@@ -2,39 +2,38 @@ package com.codeclan.example.PresentPlanner.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Entity
-@Table(name="events")
+@Table(name = "events")
 public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="event-name")
+    @Column(name="event_name")
     private String eventName;
 
-    @Column(name="event-events")
-    private java.util.Date eventDate;
+    @DateTimeFormat(pattern = "d-MM-yyyy")
+    @Column(name="date")
+    private LocalDate eventDate;
 
     @JsonIgnoreProperties({"items", "dates"})
     @ManyToOne
-    @JoinColumn(name = "person_id", nullable = false)
+    @JoinColumn(name = "persons_id", nullable = false)
     private Person person;
 
-    public Event(String event, String eventDate, Person person) {
-        this.eventName = event;
-        SimpleDateFormat newDate = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            this.eventDate = newDate.parse(eventDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+
+    public Event(String eventName, String eventDate, Person person) {
+        this.eventName = eventName;
         this.person = person;
+        DateTimeFormatter dateType = DateTimeFormatter.ofPattern("d-MM-yyyy");
+        this.eventDate = LocalDate.parse(eventDate, dateType);
     }
 
     public Event() { }
@@ -55,21 +54,6 @@ public class Event {
         this.eventName = event;
     }
 
-    public String getDate() {
-        java.util.Date savedDate = this.eventDate;
-        String date = new SimpleDateFormat("dd-MM-yyyy").format(savedDate);
-        return date;
-    }
-
-    public void setDate(String newDate) {
-        SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            this.eventDate = date.parse(newDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
     public Person getPerson() {
         return person;
     }
@@ -77,4 +61,25 @@ public class Event {
     public void setPerson(Person person) {
         this.person = person;
     }
+
+    public LocalDate getEventDate() {
+        DateTimeFormatter dateType = DateTimeFormatter.ofPattern("d-MM-yyyy");
+        String stringDate = this.eventDate.format(dateType);
+        return LocalDate.parse(stringDate, dateType);
+    }
+
+    public void setEventDate(String eventDate) {
+        DateTimeFormatter dateType = DateTimeFormatter.ofPattern("d-MM-yyyy");
+        this.eventDate = LocalDate.parse(eventDate, dateType);
+    }
+
+    public int getEventDay(){
+        return this.eventDate.getDayOfMonth();
+    }
+
+    public int getEventMonth(){
+        return this.eventDate.getMonthValue();
+    }
+
+
 }
