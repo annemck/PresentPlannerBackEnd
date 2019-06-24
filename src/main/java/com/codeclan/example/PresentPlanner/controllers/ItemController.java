@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/items")
+@RequestMapping("/api/items")
 public class ItemController {
 
     @Autowired
@@ -19,6 +19,6 @@ public class ItemController {
 
     @GetMapping(value="/person/{id}")
     public List<Item> getItemsByPersonId(@PathVariable Long id){
-        return itemRepository.getItemsByCustomerId(id);
+        return itemRepository.getItemsByPersonId(id);
     }
 }

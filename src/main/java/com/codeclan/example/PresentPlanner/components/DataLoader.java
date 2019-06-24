@@ -34,7 +34,7 @@ public class DataLoader implements ApplicationRunner {
         Person mum = new Person("Mum");
         personRepository.save(mum);
 
-        Event dadBirthday = new Event("Birthday", "29-06-2019", dad);
+        Event dadBirthday = new Event("Birthday", "30-06-2018", dad);
         eventRepository.save(dadBirthday);
 
         Event mumBirthday = new Event("Birthday", "29-06-2019", mum);
