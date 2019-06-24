@@ -41,4 +41,15 @@ public class PresentPlannerApplicationTests {
 		personRepository.save(person);
 		assertEquals("Joe", personRepository.getPersonById(person.getId()).getName());
 	}
+
+	@Test
+	public void canGetEventsByPersonId() {
+		assertEquals("Birthday", eventRepository.getAllEventsByPersonId(1L).get(0).getEventName());
+	}
+
+	@Test
+	public void canGetEventsInOrder() {
+		assertEquals(29, eventRepository.getEventsInOrder().get(0).getEventDay());
+		assertEquals(6, eventRepository.getEventsInOrder().get(0).getEventMonth());
+	}
 }

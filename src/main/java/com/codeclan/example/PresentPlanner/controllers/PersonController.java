@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
  @RestController
- @RequestMapping("/persons")
+ @RequestMapping("/api/persons")
 
 public class PersonController {
 

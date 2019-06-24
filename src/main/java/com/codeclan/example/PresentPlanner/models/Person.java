@@ -22,11 +22,11 @@ public class Person {
 //    private String dateOfBirth;
 
     @JsonIgnoreProperties("person")
-
     @OneToMany(mappedBy = "person")
     private List<Event> dates;
 
 
+    @JsonIgnoreProperties("person")
     @OneToMany(mappedBy = "person")
     private List<Item> items;
 

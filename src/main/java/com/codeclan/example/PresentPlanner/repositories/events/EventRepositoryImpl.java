@@ -25,45 +25,34 @@ public class EventRepositoryImpl implements EventRepositoryCustom{
     @Autowired
     EntityManager entityManager;
 
-//    @DateTimeFormat(pattern = "d-MM")
-//    @Transactional
-//    public List<Event> getEventsInOrder() {
-//        List<Event> eventsList = null;
-//        ArrayList<Event> events = null;
-//        List<Event> sortedEvents = null;
-//        Session session = entityManager.unwrap(Session.class);
-//
-//        DateTimeFormatter dateType = DateTimeFormatter.ofPattern("yyyy-d-MM");
-//        String longDate = LocalDate.now().toString();
-//        String shortDate = longDate.substring(4);
-//        LocalDate date = LocalDate.parse(shortDate, dateType);
-//
-//
-//
-//        try {
-//            Criteria cr = session.createCriteria(Event.class);
-//            eventsList = cr.list();
-//        } catch (HibernateException e) {
-//            e.printStackTrace();
-//        } finally {
-//            session.close();
-//        }
-//
-//        for (Event event : eventsList){
-//            events.add(event);
-//        }
-//
-//
-//        int n = events.size();
-//        for (int i = 0; i < n-1; i++)
-//            for (int j = 0; j < n-i-1; j++)
-//                if (events.get(j).getEventDay() > events.get(j+1).getEventDay() &&
-//                events.get(j).getEventMonth() >= events.get(j+1).getEventMonth())
-//                {
-//                    Event temp = events[j];
-//                    events[j] = events[j+1];
-//                    events[j+1] = temp;
-//                }
-//
-//    }
+    @DateTimeFormat(pattern = "d-MM")
+    @Transactional
+    public List<Event> getEventsInOrder() {
+        List<Event> eventsList = null;
+        Session session = entityManager.unwrap(Session.class);
+
+        try {
+            Criteria cr = session.createCriteria(Event.class);
+            eventsList = cr.list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+
+        int n = eventsList.size();
+        for (int i = 0; i < n-1; i++)
+            for (int j = 0; j < n-i-1; j++)
+                if (eventsList.get(j).getEventDay() > eventsList.get(j+1).getEventDay() &&
+                eventsList.get(j).getEventMonth() >= eventsList.get(j+1).getEventMonth())
+                {
+                    Event temp = eventsList.get(j);
+                    eventsList.set(j, eventsList.get(j+1));
+                    eventsList.set(j+1, temp);
+                }
+
+        return eventsList;
+
+    }
 }
