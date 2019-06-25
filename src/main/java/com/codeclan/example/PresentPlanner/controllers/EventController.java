@@ -21,7 +21,7 @@ public class EventController {
 
     @GetMapping(value="/person/{id}")
     public List<Event> getPersonsEvents(@PathVariable Long id){
-        return eventRepository.getAllEventsByPersonId(id);
+        return eventRepository.getAllEventsByPersonIdOrderByDaysAsc(id);
     }
 
     @GetMapping(value="/ordered-events")

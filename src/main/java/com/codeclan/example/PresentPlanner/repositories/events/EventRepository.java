@@ -10,7 +10,7 @@ import java.util.List;
 @RepositoryRestResource(excerptProjection = EmbedPersonsEvents.class)
 public interface EventRepository extends JpaRepository<Event, Long>, EventRepositoryCustom {
 
-        List<Event> getAllEventsByPersonId(Long id);
+        List<Event> getAllEventsByPersonIdOrderByDaysAsc(Long id);
 
 
 }
