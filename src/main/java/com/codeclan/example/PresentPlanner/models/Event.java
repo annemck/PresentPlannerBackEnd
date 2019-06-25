@@ -6,7 +6,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.MonthDay;
 import java.time.format.DateTimeFormatter;
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @Entity
 @Table(name = "events")
@@ -23,6 +25,9 @@ public class Event {
     @Column(name="date")
     private LocalDate eventDate;
 
+    @Column(name="days")
+    private Long days;
+
     @JsonIgnoreProperties({"items", "dates"})
     @ManyToOne
     @JoinColumn(name = "persons_id", nullable = false)
@@ -34,6 +39,7 @@ public class Event {
         this.person = person;
         DateTimeFormatter dateType = DateTimeFormatter.ofPattern("d-MM-yyyy");
         this.eventDate = LocalDate.parse(eventDate, dateType);
+        this.calculateDaysToGo();
     }
 
     public Event() { }
@@ -73,13 +79,23 @@ public class Event {
         this.eventDate = LocalDate.parse(eventDate, dateType);
     }
 
-    public int getEventDay(){
-        return this.eventDate.getDayOfMonth();
+    public void setEventDate(LocalDate eventDate) {
+        this.eventDate = eventDate;
     }
 
-    public int getEventMonth(){
-        return this.eventDate.getMonthValue();
+    public void calculateDaysToGo(){
+        MonthDay todayShort = MonthDay.now();
+        LocalDate today = todayShort.atYear(0000);
+        LocalDate event = this.eventDate.withYear(0000);
+        this.days = DAYS.between(today, event);
     }
 
+    public int getDays() {
+        int newDays = this.days.intValue();
+        return newDays;
+    }
 
+    public void setDays(Long days) {
+        this.days = days;
+    }
 }
