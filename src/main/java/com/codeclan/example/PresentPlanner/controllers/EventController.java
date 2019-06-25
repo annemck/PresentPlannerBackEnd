@@ -24,8 +24,10 @@ public class EventController {
         return eventRepository.getAllEventsByPersonId(id);
     }
 
-    @GetMapping(value = "/ordered-events")
-    public List<Event> getEventsInOrder() {
+    @GetMapping(value="/ordered-events")
+    public List<Event> getOrderedEvents(){
         return eventRepository.getEventsInOrder();
     }
+
+
 }

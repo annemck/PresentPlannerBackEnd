@@ -48,10 +48,16 @@ public class PresentPlannerApplicationTests {
 		assertEquals("Birthday", eventRepository.getAllEventsByPersonId(1L).get(0).getEventName());
 	}
 
+//	TEST EXPECTED RESULT CHANGES BY DATE!
 	@Test
-	public void canGetEventsInOrder() {
-		assertEquals(29, eventRepository.getEventsInOrder().get(0).getEventDay());
-		assertEquals(6, eventRepository.getEventsInOrder().get(0).getEventMonth());
+	public void canGetDaysToGoToEvent() {
+		assertEquals(4, eventRepository.getAllEventsByPersonId(2L).get(0).getDays());
+		assertEquals(5, eventRepository.getAllEventsByPersonId(1L).get(0).getDays());
 	}
 
+//	TEST EXPECTED RESULT CHANGES BY DATE!
+	@Test
+	public void canRunGetAllEventsQuery() {
+		assertEquals(4, eventRepository.getEventsInOrder().get(0).getDays());
+	}
 }
