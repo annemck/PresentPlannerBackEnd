@@ -88,8 +88,8 @@ public class DataLoader implements ApplicationRunner {
         Item laptop = new Item("Apple Macbook", "Laptop", "Apple Shop", 1000, "Apple shop", "she needs a new one",false, sri);
         itemRepository.save(laptop);
 
-        Item plate = new Item("Scarf", "Silk", "John Lewis", 10, "John Lewis in store", "she complemented somebody else",true, sri);
-        itemRepository.save(bag);
+        Item scarf = new Item("Scarf", "Silk", "John Lewis", 10, "John Lewis in store", "she complemented somebody else",true, sri);
+        itemRepository.save(scarf);
     }
 
 }
