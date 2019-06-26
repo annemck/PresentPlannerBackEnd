@@ -77,6 +77,7 @@ public class Event {
     public void setEventDate(String eventDate) {
         DateTimeFormatter dateType = DateTimeFormatter.ofPattern("d-MM-yyyy");
         this.eventDate = LocalDate.parse(eventDate, dateType);
+        this.calculateDaysToGo();
     }
 
     public void setEventDate(LocalDate eventDate) {
