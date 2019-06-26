@@ -90,7 +90,6 @@ public class Person {
     }
     public void addDate(Event date) {
         this.dates.add(date);
-
     }
 
     public void addITems(Item item) {
