@@ -84,9 +84,17 @@ public class Event {
     }
 
     public void calculateDaysToGo(){
+        int todayDays = LocalDate.now().getDayOfYear();
+        int eventDays = this.eventDate.getDayOfYear();
         MonthDay todayShort = MonthDay.now();
-        LocalDate today = todayShort.atYear(0000);
-        LocalDate event = this.eventDate.withYear(0000);
+        LocalDate today = null;
+        LocalDate event = null;
+        today = todayShort.atYear(0000);
+        if (eventDays > todayDays) {
+            event = this.eventDate.withYear(0000);
+        } else {
+            event = this.eventDate.withYear(0001);
+        }
         this.days = DAYS.between(today, event);
     }
 
