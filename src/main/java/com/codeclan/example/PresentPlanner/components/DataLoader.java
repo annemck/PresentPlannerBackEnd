@@ -55,6 +55,12 @@ public class DataLoader implements ApplicationRunner {
         Event mumBirthday = new Event("Birthday", "29-06-2019", mum);
         eventRepository.save(mumBirthday);
 
+        Event sriBirthday = new Event("Birthday", "20-12-2019", sri);
+        eventRepository.save(sriBirthday);
+
+        Event anneBirthday = new Event("Birthday", "15-02-2019", anne);
+        eventRepository.save(anneBirthday);
+
         Item lego = new Item("Lego", "Racing Car", "Lego Shop, Glasgow", 24.99, "www.Shop.lego.com", "Similar to the car I previously bought him", false, dad);
         itemRepository.save(lego);
 
@@ -68,7 +74,7 @@ public class DataLoader implements ApplicationRunner {
         itemRepository.save(bracelet);
 
         Item laptop = new Item("Apple Macbook", "Laptop", "Apple Shop", 1000, "Apple shop", "she needs a new one",false, sri);
-        itemRepository.save(bag);
+        itemRepository.save(laptop);
     }
 
 }
