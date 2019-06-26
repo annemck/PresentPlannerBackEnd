@@ -64,17 +64,32 @@ public class DataLoader implements ApplicationRunner {
         Item lego = new Item("Lego", "Racing Car", "Lego Shop, Glasgow", 24.99, "www.Shop.lego.com", "Similar to the car I previously bought him", false, dad);
         itemRepository.save(lego);
 
+        Item toyStoryDvd = new Item("Toy Story", "DVD", "Amazon", 9.99, "https://www.amazon.co.uk/Toy-Story-4-DVD/dp/B07SFJQ6RW/ref=sr_1_5?keywords=toy+story&qid=1561584391&s=dvd&sr=1-5", "Greatest film ever", false, david);
+        itemRepository.save(toyStoryDvd);
+
         Item bag = new Item("Handbag", "Modalu", "Debenhams", 100, "instore", "Saw it in the window of debenhams as I walked by",true, mum);
         itemRepository.save(bag);
 
+        Item monopoly = new Item("Monopoly", "Board Game", "Amazon", 20, "www.amazon.co.uk", "Sale coming up in Smyths - might get it cheaper there",false, mum);
+        itemRepository.save(monopoly);
+
         Item hpbook = new Item("Harry Potter", "Book", "Waterstones", 10, "instore", "David said he hadn't read any of the books",false, david);
         itemRepository.save(hpbook);
+
+        Item footballBook = new Item("Football", "Book", "?", 20, "instore", "Don't know what book exactly yet",true, dad);
+        itemRepository.save(footballBook);
+
+        Item flowers = new Item("Flower", "Peonies", "Bloom and Wild", 30, "www.bloomandwild.com", "flowers are a must",false, anne);
+        itemRepository.save(flowers);
 
         Item bracelet = new Item("Bracelet", "Pandora", "Pandora", 50, "uk.pandora.net", "She would love this",true, anne);
         itemRepository.save(bracelet);
 
         Item laptop = new Item("Apple Macbook", "Laptop", "Apple Shop", 1000, "Apple shop", "she needs a new one",false, sri);
         itemRepository.save(laptop);
+
+        Item plate = new Item("Scarf", "Silk", "John Lewis", 10, "John Lewis in store", "she complemented somebody else",true, sri);
+        itemRepository.save(bag);
     }
 
 }
