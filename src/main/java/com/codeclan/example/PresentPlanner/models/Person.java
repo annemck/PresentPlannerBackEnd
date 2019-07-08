@@ -22,12 +22,12 @@ public class Person {
 //    private String dateOfBirth;
 
     @JsonIgnoreProperties("person")
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "person", cascade = CascadeType.REMOVE)
     private List<Event> dates;
 
 
     @JsonIgnoreProperties("person")
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "person", cascade = CascadeType.REMOVE)
     private List<Item> items;
 
 
